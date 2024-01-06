@@ -1,0 +1,13 @@
+version: "3"
+services:
+  pagosDB:
+    image: mongo:6
+    container_name: pagos-db
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      - MONGODB_USER=pagosmongo
+      - MONGODB_PASSWORD=pagosmongo
+    volumes:
+      - ./mongo:/data/db

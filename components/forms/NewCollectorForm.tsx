@@ -1,19 +1,39 @@
 "use client";
-import { FC, Fragment } from "react";
+import { FC } from "react";
 import { useFormik } from "formik";
 import InputBase from "./InputBase";
+import { useStore } from "@/store/store";
 interface Props {}
 
 const NewCollectorForm: FC<Props> = ({}) => {
-  const { handleSubmit, handleBlur, handleChange, values } = useFormik({
-    initialValues: {
-      name: "Silvio Rodriguez",
-    },
-    onSubmit: (values, actions) => {
-      console.log("🚀 ~ file: NewPerson.tsx:18 ~ values:", values);
-      actions.setSubmitting(false);
-    },
-  });
+  const { collectors, pushCollectors } = useStore();
+  const { handleSubmit, handleBlur, handleChange, values, setValues } =
+    useFormik({
+      initialValues: {
+        name: "",
+      },
+      onSubmit: async (values, actions) => {
+        actions.setSubmitting(false);
+
+        fetch("/api", {
+          method: "POST",
+          body: JSON.stringify({ name: values.name }),
+          headers: { "Content-type": "application/json; charset=UTF-8" },
+        })
+          .then((response) => response.json())
+          .then((json) => {
+            pushCollectors([
+              ...collectors,
+              {
+                _id: json._id,
+                name: json.name,
+              },
+            ]);
+            setValues({ name: "" });
+          })
+          .catch((err) => console.log(err));
+      },
+    });
 
   return (
     <form onSubmit={handleSubmit} autoComplete="off" className="mx-4 md:mx-0">
