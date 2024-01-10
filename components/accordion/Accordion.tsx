@@ -43,7 +43,7 @@ const Accordion: FC<Props> = ({ person, _id }) => {
       <div className="p-2">
         <ul className="">
           <li>
-            · Fecha de Nac:
+            · Fecha de Nac:{" "}
             <span className="font-semibold">{person.birthdate}</span>
           </li>
           <li>
@@ -51,7 +51,7 @@ const Accordion: FC<Props> = ({ person, _id }) => {
             <span className="font-semibold">{person.movilPhone}</span>
           </li>
           <li>
-            · Estado Civil:
+            · Estado Civil:{" "}
             <span className="font-semibold">{person.civilState}</span>
           </li>
         </ul>

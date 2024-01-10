@@ -56,7 +56,10 @@ const PeopleList: FC<Props> = ({}) => {
           <Fragment key={person._id}>
             <tr className="bg-gray-100 border font-medium">
               <td className="text-center border w-10">{person.manzana}</td>
-              <td className="p-2">
+              <td
+                className="p-2"
+                onClick={() => handleToggleAccordion(person._id!)}
+              >
                 <p>{person.name}</p>
                 <p>Calle: {person.street}</p>
               </td>

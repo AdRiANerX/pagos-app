@@ -3,10 +3,17 @@ import {
   setPersonToDb,
   updatePersonToDb,
   deletePersonFromDb,
+  searchPeopleFromDb,
 } from "@/database/dbPersons";
 
 export async function GET() {
   const people = await getPeopleFromDb();
+  return Response.json({ data: people });
+}
+
+export async function PATCH(request: Request) {
+  const { query } = await request.json();
+  const people = await searchPeopleFromDb(query);
   return Response.json({ data: people });
 }
 
