@@ -1,3 +1,10 @@
+export interface IUser {
+  _id?: string;
+  username: string;
+  password: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
 export interface ICollector {
   _id?: string;
   name: string;
