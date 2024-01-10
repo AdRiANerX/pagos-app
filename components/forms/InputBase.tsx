@@ -1,4 +1,4 @@
-import { FC, Fragment } from "react";
+import { FC } from "react";
 interface Props {
   required?: boolean;
   label: string;
@@ -31,6 +31,7 @@ const InputBase: FC<Props> = ({
         id={name}
         name={name}
         value={value}
+        min={1}
         onChange={handleChange}
         onBlur={handleBlur}
         className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"

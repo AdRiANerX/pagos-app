@@ -7,12 +7,12 @@ import { useAlert } from "@/hooks/useAlert";
 interface Props {}
 
 const initialValues = {
-  name: "as",
-  manzana: "1",
-  birthdate: "1990-01-10",
-  street: "12st",
-  movilPhone: "12332111",
-  civilState: "Unión libre",
+  name: "",
+  manzana: "",
+  birthdate: "",
+  street: "",
+  movilPhone: "",
+  civilState: "",
 };
 
 const NewPersonForm: FC<Props> = ({}) => {

@@ -1,13 +1,10 @@
 "use client";
-import { FC, Fragment, useEffect } from "react";
+import { FC, Fragment } from "react";
 import { useStore } from "@/store/store";
-// import { ICollector } from "@/interfaces";
 interface Props {}
 
 const CollectorsList: FC<Props> = ({}) => {
-  const { collectors, pushCollectors, deleteCollector } = useStore(
-    (state) => state
-  );
+  const { collectors, deleteCollector } = useStore((state) => state);
 
   const handleDeleteCollector = (_id: string) => {
     fetch("/api/collector", {
@@ -18,18 +15,6 @@ const CollectorsList: FC<Props> = ({}) => {
       .then(() => deleteCollector(_id))
       .catch((err) => console.log(err));
   };
-
-  useEffect(() => {
-    fetch("/api/collector", {
-      method: "GET",
-      headers: { "Content-type": "application/json; charset=UTF-8" },
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        pushCollectors(json.data);
-      })
-      .catch((err) => console.log(err));
-  }, [pushCollectors]);
 
   return (
     <Fragment>
