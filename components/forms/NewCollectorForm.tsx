@@ -15,7 +15,7 @@ const NewCollectorForm: FC<Props> = ({}) => {
       onSubmit: async (values, actions) => {
         actions.setSubmitting(false);
 
-        fetch("/api", {
+        fetch("/api/collector", {
           method: "POST",
           body: JSON.stringify({ name: values.name }),
           headers: { "Content-type": "application/json; charset=UTF-8" },

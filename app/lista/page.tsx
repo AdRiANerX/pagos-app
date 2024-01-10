@@ -60,6 +60,8 @@ export default function ListaPage() {
       </form>
 
       <Table />
+
+      <div className="mb-20"></div>
     </div>
   );
 }

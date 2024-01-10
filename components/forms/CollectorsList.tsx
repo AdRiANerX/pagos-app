@@ -10,7 +10,7 @@ const CollectorsList: FC<Props> = ({}) => {
   );
 
   const handleDeleteCollector = (_id: string) => {
-    fetch("/api", {
+    fetch("/api/collector", {
       method: "DELETE",
       body: JSON.stringify({ _id }),
       headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -20,7 +20,7 @@ const CollectorsList: FC<Props> = ({}) => {
   };
 
   useEffect(() => {
-    fetch("/api", {
+    fetch("/api/collector", {
       method: "GET",
       headers: { "Content-type": "application/json; charset=UTF-8" },
     })

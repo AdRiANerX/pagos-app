@@ -1,5 +1,6 @@
 import { FC, Fragment } from "react";
 interface Props {
+  required?: boolean;
   label: string;
   name: string;
   type: "text" | "number" | "date";
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const InputBase: FC<Props> = ({
+  required = true,
   label,
   value,
   name,
@@ -33,7 +35,7 @@ const InputBase: FC<Props> = ({
         onBlur={handleBlur}
         className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
         placeholder="Escribe aquí..."
-        required
+        required={required}
       />
     </div>
   );

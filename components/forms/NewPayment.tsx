@@ -1,19 +1,55 @@
 "use client";
 import { useFormik } from "formik";
-import { FC, Fragment } from "react";
+import { FC, useEffect } from "react";
 import InputBase from "./InputBase";
-interface Props {}
+import { IPerson } from "@/interfaces";
+import { useStore } from "@/store/store";
+interface Props {
+  person: IPerson;
+}
 
-const NewPayment: FC<Props> = ({}) => {
+const NewPayment: FC<Props> = ({ person }) => {
+  const { pushPeople, people } = useStore();
   const { handleSubmit, handleBlur, handleChange, values } = useFormik({
     initialValues: {
-      date: "2024-01-01",
-      quantity: 150,
-      nameOfCollector: "Silvio Rodriguez",
+      date: "",
+      quantity: 0,
+      nameOfCollector: "",
     },
     onSubmit: (values, actions) => {
-      console.log("🚀 ~ file: NewPerson.tsx:18 ~ values:", values);
       actions.setSubmitting(false);
+
+      const newPerson: IPerson = {
+        ...person,
+        abonos: [
+          ...person.abonos,
+          {
+            date: values.date,
+            idCollector: "123",
+            nameOfCollector: values.nameOfCollector,
+            quantity: values.quantity,
+          },
+        ],
+      };
+
+      fetch("/api/person", {
+        method: "PUT",
+        body: JSON.stringify({ person: newPerson }),
+        headers: { "Content-type": "application/json; charset=UTF-8" },
+      })
+        .then((response) => {
+          fetch("/api/person", {
+            method: "GET",
+            headers: { "Content-type": "application/json; charset=UTF-8" },
+          })
+            .then((res) => res.json())
+            .then((json) => {
+              pushPeople(json.data);
+            })
+            .catch((err) => console.log(err));
+        })
+
+        .catch((err) => console.log(err));
     },
   });
 
@@ -27,6 +63,7 @@ const NewPayment: FC<Props> = ({}) => {
           value={values.date}
           handleBlur={handleBlur}
           handleChange={handleChange}
+          required
         />
         <InputBase
           label="Cantidad abonar"
@@ -35,6 +72,7 @@ const NewPayment: FC<Props> = ({}) => {
           value={values.quantity}
           handleBlur={handleBlur}
           handleChange={handleChange}
+          required
         />
         <InputBase
           label="¿Quién recolecta?"
@@ -43,9 +81,13 @@ const NewPayment: FC<Props> = ({}) => {
           value={values.nameOfCollector}
           handleBlur={handleBlur}
           handleChange={handleChange}
+          required
         />
       </div>
-      <button className="w-full text-white mt-4 bg-green-700 hover:bg-green-800 me-2 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none">
+      <button
+        type="submit"
+        className="w-full text-white mt-4 bg-green-700 hover:bg-green-800 me-2 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none"
+      >
         Cargar Abono
       </button>
     </form>

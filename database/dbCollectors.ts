@@ -1,4 +1,3 @@
-import bcrypt from "bcryptjs";
 import { db } from ".";
 import { CollectorModel } from "../models";
 

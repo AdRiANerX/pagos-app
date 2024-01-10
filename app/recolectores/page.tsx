@@ -7,6 +7,7 @@ export default async function RecolectorsPage() {
   return (
     <Fragment>
       <HeaderComponent title="Lista de Recolectores" backLink="/lista" />
+
       <NewCollectorForm />
       <div className="relative overflow-x-auto mt-4">
         <table className="w-full text-base text-left text-gray-800 ">
