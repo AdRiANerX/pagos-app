@@ -3,6 +3,9 @@ import { create } from "zustand";
 import { ICollector, IPerson } from "@/interfaces";
 
 interface Store {
+  userIsLoggedIn: boolean;
+  setSession: (payload: boolean) => void;
+
   collectors: ICollector[];
   pushCollectors: (payload: ICollector[]) => void;
   deleteCollector: (_id: string) => void;
@@ -15,6 +18,10 @@ interface Store {
 }
 
 export const useStore = create<Store>((set) => ({
+  userIsLoggedIn: false,
+  setSession: (payload: boolean) =>
+    set((state) => ({ userIsLoggedIn: payload })),
+
   collectors: [],
   pushCollectors: (payload: ICollector[]) =>
     set((state) => ({ collectors: payload })),

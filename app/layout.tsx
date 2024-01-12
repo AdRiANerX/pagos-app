@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
+// import CheckSession from "./CheckSession";
 
 const font = Montserrat({ subsets: ["latin"] });
 
@@ -17,7 +18,10 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={font.className}>
-        <div className="mx-auto max-w-screen-md">{children}</div>
+        <div className="mx-auto max-w-screen-md">
+          {/* <CheckSession /> */}
+          {children}
+        </div>
       </body>
     </html>
   );
